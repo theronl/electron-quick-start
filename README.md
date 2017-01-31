@@ -4,6 +4,8 @@
 
 This is a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/tutorial/quick-start) within the Electron documentation.
 
+This branch has the drag and drop gist additions from [Tim Pulver's page](https://gist.github.com/timpulver/452670e4a0ec9619a06347ff61c3f60c).
+
 **Use this app along with the [Electron API Demos](http://electron.atom.io/#get-started) app for API code examples to help you get started.**
 
 A basic Electron application needs just these files:
@@ -20,9 +22,11 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 
 ```bash
 # Clone this repository
-git clone https://github.com/electron/electron-quick-start
+git clone https://github.com/theronl/electron-quick-start
 # Go into the repository
 cd electron-quick-start
+# Check out this branch
+git checkout dragdrop
 # Install dependencies
 npm install
 # Run the app
