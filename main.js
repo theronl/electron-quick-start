@@ -1,4 +1,5 @@
 const electron = require('electron')
+const log = require('electron-log')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -11,8 +12,15 @@ const icon_path = path.join(__dirname, 'assets/drag_drop_icon.ico')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+log.transports.console.level = 'debug'
+log.transports.file.level = 'debug'
+
+log.debug('Within main.js')
+log.debug(app.getPath('temp'))
+
 
 function createWindow () {
+    log.debug('main.js createWindow called.');
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
@@ -24,8 +32,8 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
-
+  mainWindow.webContents.openDevTools();
+    
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
@@ -52,8 +60,8 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
+    if (mainWindow === null) {
+      createWindow()
   }
 })
 
@@ -63,9 +71,13 @@ app.on('activate', function () {
 // const {ipcMain} = require('electron')
 
 // ipcMain.on('ondragstart', (event, filePath) => {
-app.on('ondragstart', (event, filePath) => {
+app.on('ondragstart', (event, filePath, type) => {
+    log.debug('ondragstart called with');
+    log.debug(event);
+    log.debug(filePath);
+    log.debug(type);
   event.sender.startDrag({
     file: filePath,
-    icon: icon_path
+      icon: icon_path
   })
 })
