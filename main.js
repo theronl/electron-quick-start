@@ -1,4 +1,5 @@
 const electron = require('electron')
+const log = require('electron-log')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -11,8 +12,15 @@ const icon_path = path.join(__dirname, 'assets/drag_drop_icon.ico')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+log.transports.console.level = 'debug'
+log.transports.file.level = 'debug'
+
+log.debug('Within main.js')
+log.debug(app.getPath('temp'))
 
 function createWindow () {
+    log.debug('main.js createWindow called.');
+
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
@@ -69,3 +77,22 @@ app.on('ondragstart', (event, filePath) => {
     icon: icon_path
   })
 })
+
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and require them here.
+
+// const {ipcMain} = require('electron')
+
+// ipcMain.on('ondragstart', (event, filePath) => {
+app.on('ondragstart', (event, filePath, type) => {
+    log.debug('ondragstart called with');
+    log.debug(event);
+    log.debug(filePath);
+    log.debug(type);
+  event.sender.startDrag({
+    file: filePath,
+      icon: icon_path
+  })
+})
+
+

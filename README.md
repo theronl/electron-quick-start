@@ -33,6 +33,17 @@ npm install
 npm start
 ```
 
+```bash
+# Install Devtron
+$ npm install --save-dev devtron
+```
+
+```javascript
+// Run the following from the Console tab of your app's DevTools
+require('devtron').install()
+// You should now see a Devtron tab added to the DevTools
+```
+
 Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/).
 
 ## Other Example Apps
@@ -40,5 +51,9 @@ Learn more about Electron and its API in the [documentation](http://electron.ato
 For more example apps, see the
 [list of boilerplates](http://electron.atom.io/community/#boilerplates)
 created by the awesome electron community.
+
+
+
+
 
 #### License [CC0 1.0 (Public Domain)](LICENSE.md)
